@@ -1,0 +1,20 @@
+{
+  "name": "MovieReminder",
+  "version": "1.0.0",
+  "description": "Movie Reminder Alexa Skill to track when new release movies become available to rent",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "alexa",
+    "skill",
+    "fact"
+  ],
+  "author": "Megan Laux",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "alexa-sdk": "^1.0.12",
+    "firebase": "^3.2.1"
+  }
+}
