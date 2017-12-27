@@ -36,9 +36,12 @@ const rootHandler = {
   },
   "AddMovieIntent": function () {
     console.log("Hit root:AddMovieIntent");
-    //var filledSlots = delegateSlotCollection.call(this);
-    this.handler.state = states.ADD_MOVIE;
-    this.emitWithState('StartIntent');
+    if (this.event.request.dialogState !== "COMPLETED"){
+      delegateSlotCollection.call(this);
+    } else {
+      this.handler.state = states.ADD_MOVIE;
+      this.emitWithState('StartIntent');
+    }
   },
   "MovieListIntent": function () {
     console.log("Hit root:MovieListIntent");
@@ -226,16 +229,10 @@ function delegateSlotCollection(){
       //you have defaults, then return Dialog.Delegate with this updated intent
       // in the updatedIntent property
       this.emit(":delegate", updatedIntent);
-    } else if (this.event.request.dialogState !== "COMPLETED") {
+    } else {
       console.log("in not completed");
       // return a Dialog.Delegate directive with no updatedIntent property.
       this.emit(":delegate");
-    } else {
-      console.log("in completed");
-      console.log("returning: "+ JSON.stringify(this.event.request.intent));
-      // Dialog is now complete and all required slots should be filled,
-      // so call your normal intent handler.
-      return this.event.request.intent;
     }
 }
 
